@@ -1,0 +1,35 @@
+%include "io.inc"
+
+section .data
+n dw 10
+i dw 3
+
+section .text
+global CMAIN
+CMAIN:
+    ;write your code here
+    
+    mov ax , [n]
+    cwde
+    mov ecx , [i]
+    
+    cmp ecx, 0
+    je end
+    
+    while:
+        mov ebx , eax 
+        shr ebx , 1
+        jc odd
+        shr eax , 1
+        loop while
+        jmp end
+        odd:
+            mov ebx , 3
+            mul ebx 
+            inc eax
+            loop while
+            jmp end
+     end:
+     PRINT_DEC 4 , eax
+    xor eax, eax
+    ret
